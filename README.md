@@ -101,12 +101,14 @@ sbatch train.sh
 
 ## Citation
 ```bash
-@InProceedings{Pelhan_2024_NeurIPS, 
-author = {Jer Pelhan and Alan Lukežič and Vitjan Zavrtanik and Matej Kristan},
-title = {A Novel Unified Architecture for Low-Shot Counting by Detection and Segmentation}, booktitle = {Advances in Neural Information Processing Systems},
-volume={37}, 
-year={2024}, 
-publisher={Curran Associates, Inc.} }
+@article{pelhan2024novel,
+  title={A Novel Unified Architecture for Low-Shot Counting by Detection and Segmentation},
+  author={Pelhan, Jer and Lukezic, Alan and Zavrtanik, Vitjan and Kristan, Matej},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  pages={66260--66282},
+  year={2024}
+}
 ```
 
 ## Possible applications

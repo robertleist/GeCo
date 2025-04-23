@@ -85,7 +85,7 @@ def demo(args):
     bboxes = torch.tensor(bounding_boxes, dtype=torch.float32)
 
     img, bboxes, scale = resize_and_pad(image, bboxes, full_stretch=False)
-    img = img.unsqueeze(0).to(device)
+    img = T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img).unsqueeze(0).to(device)
     bboxes = bboxes.unsqueeze(0).to(device)
 
     outputs, _, _, _, masks = model(img, bboxes)

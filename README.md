@@ -8,13 +8,13 @@
 - Added `paths.py` to keep track of the paths used.
 - Used `uv` to create an environment and to make the repo installable.
 ## How to install
-You can now pip install this repo by either downloading it first and the running inside the repository: 
+You can now uv install this repo by either downloading it first and the running inside the repository: 
 ```shell
-pip install .
+uv add .
 ``` 
 or by installing it from this fork:
 ```shell
-pip install https://github.com/robertleist/GeCo.git
+uv add https://github.com/robertleist/GeCo.git
 ```
 
 

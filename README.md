@@ -1,3 +1,9 @@
+>[!IMPORTANT] 
+> This is a fork of the GeCo repository. I only adapt it to make it pip installable into the environment. 
+ 
+Original Readme ⬇️
+--- 
+
 # GeCo (A Novel Unified Architecture for Low-Shot Counting by Detection and Segmentation)
 
 

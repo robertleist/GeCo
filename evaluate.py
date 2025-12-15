@@ -2,9 +2,9 @@ import json
 from torchvision import ops
 from torch.nn import DataParallel
 
-from models.geco_infer import build_model
-from utils.data import FSC147Dataset, resize_and_pad
-from utils.arg_parser import get_argparser
+from geco.models import build_model
+from geco.utils.data import FSC147Dataset, resize_and_pad
+from geco.utils.arg_parser import get_argparser
 
 import argparse
 import os

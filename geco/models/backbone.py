@@ -2,12 +2,9 @@ import os.path
 
 import torch
 from torch import nn
-from torch.nn import functional as F
-from torchvision import models
-from torchvision.ops.misc import FrozenBatchNorm2d
 
-from models.common import LayerNorm2d
-from models.sam_ViT import ImageEncoderViT
+from geco.models.common import LayerNorm2d
+from geco.models.sam_ViT import ImageEncoderViT
 from functools import partial
 
 

@@ -6,7 +6,7 @@ from torchvision.transforms import Resize
 
 from download_weights import download_weights
 from paths import WEIGHTS_FILE
-from utils.box_ops import boxes_with_scores
+from geco.utils.box_ops import boxes_with_scores
 from .DQE import DQE
 from .backbone import Backbone
 from .common import MLP
@@ -62,7 +62,7 @@ class GeCo(nn.Module):
         )
 
         if self.inference_mode:
-            from segment_anything.modeling import MaskDecoder, TwoWayTransformer, PromptEncoder
+            from geco.segment_anything.modeling import MaskDecoder, TwoWayTransformer, PromptEncoder
 
             prompt_embed_dim = 256
             image_embedding_size = 64

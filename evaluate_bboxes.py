@@ -11,7 +11,7 @@ import os.path as osp
 import pickle as pkl
 from collections import OrderedDict
 
-from utils.arg_parser import get_argparser
+from geco.utils.arg_parser import get_argparser
 import numpy as np
 import torch
 from detectron2.evaluation.evaluator import DatasetEvaluator
@@ -21,7 +21,6 @@ from detectron2.utils.logger import create_small_table
 from fvcore.common.file_io import PathManager
 from pycocotools.coco import COCO
 from tabulate import tabulate
-from torchvision.ops import box_iou
 
 
 class COCOEvaluator(DatasetEvaluator):

@@ -1,9 +1,9 @@
-from models.geco import build_model
-from models.matcher import build_matcher
+from geco.models import build_model
+from geco.models import build_matcher
 from torchvision import ops
-from utils.data import FSC147Dataset
-from utils.arg_parser import get_argparser
-from utils.losses import SetCriterion
+from geco.utils.data import FSC147Dataset
+from geco.utils.arg_parser import get_argparser
+from geco.utils.losses import SetCriterion
 from time import perf_counter
 import argparse
 import os
@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader, DistributedSampler
 from torch.nn.parallel import DistributedDataParallel
 from torch import distributed as dist
-from utils.data import pad_collate
+from geco.utils.data import pad_collate
 import numpy as np
 import random
 

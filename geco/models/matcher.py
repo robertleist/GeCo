@@ -2,7 +2,7 @@ import numpy as np
 import torch
 from scipy.optimize import linear_sum_assignment
 from torch import nn
-from utils.box_ops import generalized_box_iou, box_iou
+from geco.utils.box_ops import generalized_box_iou, box_iou
 
 
 class GeCoMatcher(nn.Module):

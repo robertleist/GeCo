@@ -1,8 +1,8 @@
-from models.geco import build_model
-from utils.box_ops import compute_location, BoxList
-from utils.data import FSC147Dataset
-from utils.arg_parser import get_argparser
-from utils.losses import ObjectNormalizedL2Loss, Detection_criterion
+from geco.models import build_model
+from geco.utils.box_ops import compute_location, BoxList
+from geco.utils.data import FSC147Dataset
+from geco.utils.arg_parser import get_argparser
+from geco.utils.losses import ObjectNormalizedL2Loss, Detection_criterion
 from time import perf_counter
 import argparse
 import os
@@ -12,7 +12,7 @@ from torch import nn
 from torch.utils.data import DataLoader, DistributedSampler
 from torch.nn.parallel import DistributedDataParallel
 from torch import distributed as dist
-from utils.data import pad_collate
+from geco.utils.data import pad_collate
 import numpy as np
 import random
 

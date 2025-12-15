@@ -11,7 +11,7 @@ import os.path as osp
 import pickle as pkl
 from collections import OrderedDict
 
-from src.utils.arg_parser import get_argparser
+from geco.utils.arg_parser import get_argparser
 import numpy as np
 import torch
 from detectron2.evaluation.evaluator import DatasetEvaluator

@@ -3,8 +3,8 @@ import os.path
 import torch
 from torch import nn
 
-from src.models.common import LayerNorm2d
-from src.models.sam_ViT import ImageEncoderViT
+from geco.models.common import LayerNorm2d
+from geco.models.sam_ViT import ImageEncoderViT
 from functools import partial
 
 

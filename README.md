@@ -1,6 +1,23 @@
 >[!IMPORTANT] 
-> This is a fork of the GeCo repository. I only adapt it to make it pip installable into the environment. 
- 
+> This is a fork of the GeCo repository. I had no part in the model creation or a majority of the code base. I only adapt it to make it pip installable into an environment. All changes are listed below. For questions about the paper or the code, please contact the authors of the original repo & paper.
+
+## Changes
+- Combined `GeCo` classes from `geco_infer.py` and `geco.py`. `build_model` functions still exist, so this should be compatible with the original implementation.
+- Added `download_weights.py` to automatically download the backbone weights in code.
+- Added `from_pretrained(...)` class method to `GeCo` class. It automatically downloads the backbone and initializes with it.
+- Added `paths.py` to keep track of the paths used.
+- Used `uv` to create an environment and to make the repo installable.
+## How to install
+You can now pip install this repo by either downloading it first and the running inside the repository: 
+```shell
+pip install .
+``` 
+or by installing it from this fork:
+```shell
+pip install https://github.com/robertleist/GeCo.git
+```
+
+
 Original Readme ⬇️
 --- 
 

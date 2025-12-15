@@ -8,6 +8,8 @@ from .prompt_encoder import PromptEncoder_DQE
 import torch
 from torch import nn
 from torchvision.transforms import Resize
+from download_weights import download_weights
+from paths import WEIGHTS_FILE
 
 
 class GeCo(nn.Module):
@@ -112,6 +114,32 @@ class GeCo(nn.Module):
         outputs, ref_points = boxes_with_scores(centerness, outputs_coord)
 
         return outputs, ref_points, centerness, outputs_coord
+
+    @classmethod
+    def from_pretrained(cls,
+                        image_size: int,
+                        num_objects: int,
+                        emb_dim: int,
+                        num_heads: int,
+                        kernel_dim: int,
+                        train_backbone: bool,
+                        reduction: int,
+                        zero_shot: bool,
+                        force_download=False):
+        download_weights(force_download)
+        return cls(
+            image_size=image_size,
+            num_objects=num_objects,
+            emb_dim=emb_dim,
+            num_heads=num_heads,
+            kernel_dim=kernel_dim,
+            train_backbone=train_backbone,
+            reduction=reduction,
+            zero_shot=zero_shot,
+            model_path=WEIGHTS_FILE,
+        )
+
+
 
 
 

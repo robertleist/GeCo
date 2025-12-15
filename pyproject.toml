@@ -20,4 +20,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "geco"}
+package-dir = {"" = "src"}

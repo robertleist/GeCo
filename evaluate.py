@@ -2,9 +2,9 @@ import json
 from torchvision import ops
 from torch.nn import DataParallel
 
-from src.models import build_model
-from src.utils.data import FSC147Dataset, resize_and_pad
-from src.utils.arg_parser import get_argparser
+from geco.models import build_model
+from geco.utils.data import FSC147Dataset, resize_and_pad
+from geco.utils.arg_parser import get_argparser
 
 import argparse
 import os
@@ -111,7 +111,7 @@ def evaluate(args):
             f"MAE: {ae.item() / len(test):.2f}",
             f"RMSE: {torch.sqrt(se / len(test)).item():.2f}",
         )
-        with open("src" + "_" + split + ".json", "w") as handle:
+        with open("geco" + "_" + split + ".json", "w") as handle:
             json.dump(predictions, handle)
 
 

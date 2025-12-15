@@ -9,8 +9,8 @@ from torch import nn
 
 from typing import Tuple
 
-from src.models.regression import UpsamplingLayer
-from src.models.transformer import SelfCrossAttentionBlock, PrototypeAttentionBlock, ImgToPrototypeAttentionBlock
+from geco.models.regression import UpsamplingLayer
+from geco.models.transformer import SelfCrossAttentionBlock, PrototypeAttentionBlock, ImgToPrototypeAttentionBlock
 
 
 class DQE(nn.Module):

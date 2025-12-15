@@ -1,13 +1,13 @@
 from torch.nn import DataParallel
-from geco.models import build_model
-from geco.utils.arg_parser import get_argparser
+from src.models import build_model
+from src.utils.arg_parser import get_argparser
 import argparse
 import torch
 from torchvision import transforms as T
 import matplotlib.patches as patches
 from PIL import Image
 from torchvision import ops
-from geco.utils.data import resize_and_pad
+from src.utils.data import resize_and_pad
 import matplotlib.pyplot as plt
 
 bounding_boxes = []

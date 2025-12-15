@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 from torch import nn
-from geco.utils import box_ops
+from src.utils import box_ops
 import copy
 
 

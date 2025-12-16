@@ -4,7 +4,7 @@ from os.path import exists
 from requests import get
 from tqdm import tqdm
 
-from paths import WEIGHTS_FILE, WEIGHTS_DOWNLOAD_URL, WEIGHTS_DIR
+from geco.paths import WEIGHTS_FILE, WEIGHTS_DOWNLOAD_URL, WEIGHTS_DIR
 
 
 def download_weights(force_download=False):

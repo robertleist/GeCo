@@ -54,9 +54,11 @@ class Backbone(nn.Module):
             nn.ConvTranspose2d(transformer_dim // 4, transformer_dim // 8, kernel_size=2, stride=2),
         )
         if model_path is not None:
-
-            checkpoint = torch.load(os.path.join(model_path, "sam_hq_vit_h.pth"), map_location="cpu"
-                                    )
+            if os.path.isfile(model_path):
+                file_path = model_path
+            else:
+                file_path = os.path.join(model_path, "sam_hq_vit_h.pth")
+            checkpoint = torch.load(file_path, map_location="cpu")
             state_dict = {k.replace("image_encoder.", ""): v for k, v in checkpoint.items() if "image_encoder" in k}
             self.backbone.load_state_dict(state_dict)
 

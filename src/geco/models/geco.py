@@ -42,7 +42,7 @@ class GeCo(nn.Module):
         self.model_path = model_path
         self.inference_mode = inference_mode
         self.return_masks = return_masks
-        self.backbone = Backbone(requires_grad=train_backbone, image_size=image_size)
+        self.backbone = Backbone(requires_grad=train_backbone, image_size=image_size, model_path=SAM_HQ_WEIGHTS_FILE)
 
         self.class_embed = nn.Sequential(nn.Linear(emb_dim, 1), nn.LeakyReLU())
         self.bbox_embed = MLP(emb_dim, emb_dim, 4, 3)
@@ -215,35 +215,10 @@ class GeCo(nn.Module):
         src, src_hq = self.backbone(x)
         bs, c, h, w = src.size()
 
-        if self.inference_mode:
-            if not self.zero_shot:
-                prototype_embeddings = self.create_prototypes(src, bboxes)
-            else:  # zero shot
-                prototype_embeddings = self.exemplars.expand(bs, -1, -1)
-        else:
-            bboxes_roi = torch.cat([
-                torch.arange(
-                    bs, requires_grad=False
-                ).to(bboxes.device).repeat_interleave(self.num_objects).reshape(-1, 1),
-                bboxes.flatten(0, 1),
-            ], dim=1)
-
-            # Roi align
-            exemplars = roi_align(
-                src,
-                boxes=bboxes_roi, output_size=self.kernel_dim,
-                spatial_scale=1.0 / self.reduction, aligned=True
-            ).permute(0, 2, 3, 1).reshape(bs, self.num_objects * self.kernel_dim ** 2, self.emb_dim)
-
-            box_hw = torch.zeros(bboxes.size(0), bboxes.size(1), 2).to(bboxes.device)
-            box_hw[:, :, 0] = bboxes[:, :, 2] - bboxes[:, :, 0]
-            box_hw[:, :, 1] = bboxes[:, :, 3] - bboxes[:, :, 1]
-
-            # Encode shape
-            shape = self.shape_or_objectness(box_hw).reshape(
-                bs, -1, self.emb_dim
-            )
-            prototype_embeddings = torch.cat([exemplars, shape], dim=1)
+        if not self.zero_shot:
+            prototype_embeddings = self.create_prototypes(src, bboxes)
+        else:  # zero shot
+            prototype_embeddings = self.exemplars.expand(bs, -1, -1)
 
         # adapt image feature with prototypes
         adapted_f = self.adapt_features(

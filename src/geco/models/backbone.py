@@ -1,6 +1,8 @@
 import os.path
 
 import torch
+from geco.download_weights import download_weights
+from geco.paths import SAM_HQ_WEIGHTS_DOWNLOAD_URL
 from torch import nn
 
 from geco.models.common import LayerNorm2d
@@ -58,6 +60,8 @@ class Backbone(nn.Module):
                 file_path = model_path
             else:
                 file_path = os.path.join(model_path, "sam_hq_vit_h.pth")
+            if not os.path.exists(file_path):
+                download_weights(SAM_HQ_WEIGHTS_DOWNLOAD_URL, file_path, os.path.dirname(file_path))
             checkpoint = torch.load(file_path, map_location="cpu")
             state_dict = {k.replace("image_encoder.", ""): v for k, v in checkpoint.items() if "image_encoder" in k}
             self.backbone.load_state_dict(state_dict)

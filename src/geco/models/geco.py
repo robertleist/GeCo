@@ -285,7 +285,7 @@ class GeCo(nn.Module):
                         return_masks: bool = False,
                         force_download=False):
         # download_weights(SAM_HQ_WEIGHTS_DOWNLOAD_URL, SAM_HQ_WEIGHTS_FILE, force_download)
-        download_weights(GECO_WEIGHTS_DOWNLOAD_URL, GECO_WEIGHTS_FILE, force_download)
+        download_weights(GECO_WEIGHTS_DOWNLOAD_URL, GECO_WEIGHTS_FILE, force_download=force_download)
         model = cls(
             image_size=image_size,
             num_objects=num_objects,

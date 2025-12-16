@@ -268,6 +268,7 @@ class GeCo(nn.Module):
                 outputs[i]["pred_boxes"] = corrected_bboxes[i].to(outputs[i]["pred_boxes"].device).unsqueeze(0) / \
                                            x.shape[
                                                -1]
+                outputs[i]["pred_masks"] = masks[i]
 
         return outputs, ref_points, centerness, outputs_coord
 

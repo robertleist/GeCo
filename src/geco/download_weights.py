@@ -1,9 +1,11 @@
 import os
+from os.path import exists
 
-from paths import WEIGHTS_FILE, WEIGHTS_DOWNLOAD_URL, WEIGHTS_DIR
-from os.path import join, exists
 from requests import get
 from tqdm import tqdm
+
+from paths import WEIGHTS_FILE, WEIGHTS_DOWNLOAD_URL, WEIGHTS_DIR
+
 
 def download_weights(force_download=False):
     os.makedirs(WEIGHTS_DIR, exist_ok=True)

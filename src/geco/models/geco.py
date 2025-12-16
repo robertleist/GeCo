@@ -5,7 +5,7 @@ from torchvision.ops import roi_align
 from torchvision.transforms import Resize
 
 from geco.download_weights import download_weights
-from geco.paths import WEIGHTS_FILE
+from geco.paths import SAM_HQ_WEIGHTS_FILE, SAM_HQ_WEIGHTS_DOWNLOAD_URL, GECO_WEIGHTS_FILE, GECO_WEIGHTS_DOWNLOAD_URL
 from geco.utils.box_ops import boxes_with_scores
 from .DQE import DQE
 from .backbone import Backbone
@@ -42,7 +42,7 @@ class GeCo(nn.Module):
         self.model_path = model_path
         self.inference_mode = inference_mode
         self.return_masks = return_masks
-        self.backbone = Backbone(requires_grad=train_backbone, image_size=image_size, model_path=model_path)
+        self.backbone = Backbone(requires_grad=train_backbone, image_size=image_size)
 
         self.class_embed = nn.Sequential(nn.Linear(emb_dim, 1), nn.LeakyReLU())
         self.bbox_embed = MLP(emb_dim, emb_dim, 4, 3)
@@ -115,6 +115,9 @@ class GeCo(nn.Module):
                 nn.Linear(emb_dim, 1 ** 2 * emb_dim)
             )
         self.resize = Resize((512, 512))
+        state_dict = torch.load(self.model_path)['model']
+        state_dict = {k if 'module.' in k else 'module.' + k: v for k, v in state_dict.items()}
+        self.load_state_dict(state_dict)
 
     def refine_bounding_boxes(self, features, outputs, return_masks=False):
 
@@ -281,8 +284,9 @@ class GeCo(nn.Module):
                         inference_mode: bool = False,
                         return_masks: bool = False,
                         force_download=False):
-        download_weights(force_download)
-        return cls(
+        # download_weights(SAM_HQ_WEIGHTS_DOWNLOAD_URL, SAM_HQ_WEIGHTS_FILE, force_download)
+        download_weights(GECO_WEIGHTS_DOWNLOAD_URL, GECO_WEIGHTS_FILE, force_download)
+        model = cls(
             image_size=image_size,
             num_objects=num_objects,
             emb_dim=emb_dim,
@@ -291,10 +295,11 @@ class GeCo(nn.Module):
             train_backbone=train_backbone,
             reduction=reduction,
             zero_shot=zero_shot,
-            model_path=WEIGHTS_FILE,
+            model_path=GECO_WEIGHTS_FILE,
             inference_mode=inference_mode,
             return_masks=return_masks,
         )
+
 
 
 

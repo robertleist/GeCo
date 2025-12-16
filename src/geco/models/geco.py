@@ -116,7 +116,6 @@ class GeCo(nn.Module):
             )
         self.resize = Resize((512, 512))
         state_dict = torch.load(self.model_path)['model']
-        state_dict = {k if 'module.' in k else 'module.' + k: v for k, v in state_dict.items()}
         self.load_state_dict(state_dict)
 
     def refine_bounding_boxes(self, features, outputs, return_masks=False):

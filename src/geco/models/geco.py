@@ -4,8 +4,8 @@ from torch.nn import functional as F
 from torchvision.ops import roi_align
 from torchvision.transforms import Resize
 
-from download_weights import download_weights
-from paths import WEIGHTS_FILE
+from geco.download_weights import download_weights
+from geco.paths import WEIGHTS_FILE
 from geco.utils.box_ops import boxes_with_scores
 from .DQE import DQE
 from .backbone import Backbone

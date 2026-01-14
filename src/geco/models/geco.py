@@ -247,6 +247,19 @@ class GeCo(nn.Module):
 
         return outputs, ref_points, centerness, outputs_coord
 
+    def predict(self, x, bboxes):
+        outputs, ref_points, centerness, outputs_coord = self.forward(x, bboxes)
+        num_objects_gt, num_objects_pred, nms_bboxes, nms_scores, nms_masks, nms_ref_points = postprocess(img,
+                                                                                                          bboxes,
+                                                                                                          gt_bboxes,
+                                                                                                          outputs,
+                                                                                                          ref_points,
+                                                                                                          centerness,
+                                                                                                          padwh,
+                                                                                                          test, ids,
+                                                                                                          device,
+                                                                                                          plot=False)
+
     @classmethod
     def from_pretrained(cls,
                         image_size: int,
